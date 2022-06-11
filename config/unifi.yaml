@@ -1,0 +1,6 @@
+---
+refresh_interval: 2 # seconds
+urls:
+  - https://store.ui.com/collections/unifi-network-switching/products/usp-rps
+  - https://store.ui.com/collections/unifi-network-switching/products/switch-enterprise-8-poe
+...
