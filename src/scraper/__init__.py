@@ -14,6 +14,7 @@ import scraper.playstation
 import scraper.samsclub
 import scraper.toysrus
 import scraper.walmart
+import scraper.unifi
 
 
 from scraper.common import ScraperFactory
