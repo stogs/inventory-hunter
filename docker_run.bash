@@ -17,7 +17,7 @@ usage() {
 [ $# -eq 0 ] && usage
 
 alerter="email"
-default_image="ericjmarti/inventory-hunter:latest"
+default_image="xxxxxxxxx"
 image=$default_image
 network="inventory_hunter"
 
@@ -51,17 +51,17 @@ else
         [ -z "$chat_id" ] && usage "missing telegram chat id argument"
     fi
 fi
-
-if [ "$image" = "$default_image" ]; then
-    docker pull "$image"
-else
-    result=$(docker images -q $image)
-    if [ -z "$result" ]; then
-        echo "the $image docker image does not exist... please build the image and try again"
-        echo "build command: docker build -t $image ."
-        exit 1
-    fi
-fi
+#only using my local image for now will hardcode
+#if [ "$image" = "$default_image" ]; then
+#    docker pull "$image"
+#else
+#    result=$(docker images -q $image)
+#    if [ -z "$result" ]; then
+#        echo "the $image docker image does not exist... please build the image and try again"
+#        echo "build command: docker build -t $image ."
+#        exit 1
+#    fi
+#fi
 
 # docker requires absolute paths
 if [ "$(uname)" = "Darwin" ]; then
@@ -95,7 +95,8 @@ volumes="-v $data_dir:/data -v $log_file:/log.txt -v $config:/config.yaml"
 
 entrypoint="--entrypoint=/src/run.bash"
 
-docker_run_cmd="docker run -d --rm $entrypoint --name $container_name --network $network $volumes $image --alerter $alerter"
+#removed remove(--rm) to keep the container around after stopping
+docker_run_cmd="docker run -d $entrypoint --name $container_name --network $network $volumes $image --alerter $alerter"
 
 if [ ! -z "$alerter_config" ]; then
     docker_run_cmd="$docker_run_cmd --alerter-config /alerters.yaml"

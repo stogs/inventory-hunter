@@ -1,0 +1,9 @@
+---
+alerters:
+  email:
+    sender: scott.stogdill@gmail.com
+    recipients:
+      - 5159549030@vtext.com
+      - scott.stogdill@gmail.com
+    relay: 172.17.0.1
+...
