@@ -6,21 +6,15 @@ class UnifiScrapeResult(ScrapeResult):
         alert_subject = 'In Stock'
         alert_content = ''
 
-        # detect captcha
-        tag = self.soup.body.find('div', id='px-captcha')
-        if tag:
-            self.captcha = True
-            return
-
         # get name of product
-        tag = self.soup.body.select_one('h1.prod-ProductTitle.prod-productTitle-buyBox.font-bold')
+        tag = self.soup.body.find('div', class_='comProduct__title--wrapper')
         if tag:
             alert_content += tag.text.strip() + '\n'
         else:
             self.logger.warning(f'missing title: {self.url}')
 
         # get listed price
-        tag = self.soup.body.select_one('section.prod-PriceSection div.prod-PriceHero span.price-group')
+        tag = self.soup.body.find('div', class_='comProduct__price add16right')
         price_str = self.set_price(tag)
         if price_str:
             alert_subject = f'In Stock for {price_str}'
@@ -28,7 +22,7 @@ class UnifiScrapeResult(ScrapeResult):
             self.logger.warning(f'missing price: {self.url}')
 
         # check for add to cart button
-        tag = self.soup.body.select_one('section.prod-ProductCTA.primaryProductCTA-marker button')
+        tag = self.soup.body.find('div', class_='comProduct__button flex-grow-1 add8left')
         if tag and 'add to cart' in str(tag).lower():
             self.alert_subject = alert_subject
             self.alert_content = f'{alert_content.strip()}\n{self.url}'
