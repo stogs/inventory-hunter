@@ -1,6 +1,7 @@
 ---
-refresh_interval: 301 # seconds
+refresh_interval: 300 # seconds
 urls:
   - https://store.ui.com/collections/unifi-network-switching/products/usp-rps
-  - https://store.ui.com/collections/unifi-network-switching/products/switch-enterprise-8-poe
+  - https://store.ui.com/collections/unifi-network-wireless/products/access-point-wifi-6-in-wall
+  - https://store.ui.com/collections/unifi-protect/products/uvc-g4-bullet
 ...
