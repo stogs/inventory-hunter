@@ -21,8 +21,8 @@ class UnifiScrapeResult(ScrapeResult):
         else:
             self.logger.warning(f'missing price: {self.url}')
 
-        # check for add to cart button
-        tag = self.soup.body.find('div', class_='comProductTile__inStock add8right')
+        # check for in-stock icon
+        tag = self.soup.find('span', class_='comProductTile__inStock add8right')
         if tag:
             self.alert_subject = alert_subject
             self.alert_content = f'{alert_content.strip()}\n{self.url}'
